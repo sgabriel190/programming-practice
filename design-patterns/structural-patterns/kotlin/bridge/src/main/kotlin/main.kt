@@ -2,6 +2,15 @@ import abstractions.AdvancedRemoteControl
 import abstractions.RemoteControl
 import implementations.TV
 
+/**
+ * BRIDGE PATTERN
+ * ->It can be split up into: Abstraction(the interface given to an user) and Implementation(the actual low level
+ * implementation)
+ * ->Use the Bridge pattern when you want to divide and organize a monolithic class that has several variants
+ * of some functionality (for example, if the class can work with various database servers).
+ * ->Use the pattern when you need to extend a class in several orthogonal (independent) dimensions.
+ * ->Use the Bridge if you need to be able to switch implementations at runtime.
+ */
 fun main(){
     val device = TV()
     val remoteControl = RemoteControl(device)
