@@ -4,6 +4,8 @@ import implementations.TV
 
 /**
  * BRIDGE PATTERN
+ * -> Is a structural design pattern that lets you split a large class or a set of closely related classes into two
+ * separate hierarchies-abstraction and implementation-which can be developed independently.
  * ->It can be split up into: Abstraction(the interface given to an user) and Implementation(the actual low level
  * implementation)
  * ->Use the Bridge pattern when you want to divide and organize a monolithic class that has several variants
