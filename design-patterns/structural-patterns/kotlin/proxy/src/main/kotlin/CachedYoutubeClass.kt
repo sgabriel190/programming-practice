@@ -1,7 +1,5 @@
-class CachedYoutubeClass(
-    private val service: ThirdPartyYoutubeClass
-): ThirdPartyYoutubeLib {
-
+class CachedYoutubeClass: ThirdPartyYoutubeLib {
+    private val service = ThirdPartyYoutubeClass()
     private var listCache = ""
     private var videoCache = ""
     private var needReset = false

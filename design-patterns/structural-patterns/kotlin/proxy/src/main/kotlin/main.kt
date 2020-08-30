@@ -14,10 +14,14 @@
  *  life cycle if this cache, especially if results are quite large.
  *  -> The proxy can implement caching for recurring requests that always yield the same results. The proxy may use the
  *  parameters of requests as the cache keys.
+ *  -> Access control (protection proxy). This is when you want only specific clients to be able to use the service
+ *  object;
+ *  -> Logging requests (logging proxy). This is when you want to keep history of requests to the service object.
+ *  -> Smart reference. This is when you need to be able to dismiss a heavyweight object once there are no clients
+ *  that use it.
  */
 fun main(){
-    val aYouTubeService = ThirdPartyYoutubeClass()
-    val aYouTubeProxy = CachedYoutubeClass(aYouTubeService)
+    val aYouTubeProxy = CachedYoutubeClass()
 
     println("${aYouTubeProxy.listVideos()} ${aYouTubeProxy.donwloadVideo(10)} ${aYouTubeProxy.getVideoInfo(10)}")
 }
