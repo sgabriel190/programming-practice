@@ -10,6 +10,7 @@ if __name__ == "__main__":
         if value >= dollar_bills[idx_bill]:
             result += value // dollar_bills[idx_bill]
             value = value % dollar_bills[idx_bill]
+            idx_bill -= 1
         else:
             idx_bill -= 1
     print(result)
