@@ -90,6 +90,8 @@ public class Solution {
      * Given a string, write a function to check if it is a permutation of a palindrome. A palindrome is a word or
      * phrase that is the same forwards and backwards. A permutation is a rearrangement of letters. The palindrome does
      * not need to be limited to just dictionary words.
+     *
+     * p195
      */
     public boolean p4(String word){
         if(word == null){
@@ -112,15 +114,67 @@ public class Solution {
         return true;
     }
 
-    /*
-    public int addBit(int a, int b){
-        while(b != 0){
-            int sum = a ^ b;
-            int carry = (a & b) << 1;
-            a = sum;
-            b = carry;
+    /**
+     * There are three types of edits that can be performed on strings: insert a character, remove a character,
+     * or replace a character. Given two strings, write a function to check if they are one edit (or zero edits) away.
+     *
+     * p199
+     */
+    public boolean p5(String s1, String s2){
+        if(s1 == null || s2 == null){
+            return false;
         }
-        return a;
+        if(Math.abs(s1.length() - s2.length()) > 1){
+            return false;
+        }
+        byte[] freq = new byte[128];
+        int sumPos = 0, sumNeg = 0;
+        for(char c: s1.toCharArray()){ // O(s1)
+            freq[c]++;
+        }
+        for(char c: s2.toCharArray()){ // O(s2)
+            freq[c]--;
+        }
+        for(byte elem: freq){ // O(1)
+            if(elem < 0){
+                sumNeg += elem;
+            } else{
+                sumPos += elem;
+            }
+        }
+        if(sumNeg * (-1) > 1 || sumPos > 1){
+            return false;
+        }
+        return true;
     }
-    */
+
+    /**
+     * Implement a  method to perform basic string compression using the counts of repeated characters. For example,
+     * the string aabcccccaaa would become a2blc5a3. If the "compressed" string would not become smaller than the original
+     * string, your method should return the original string. You can assume the string has only uppercase and lowercase
+     * letters (a - z)
+     *
+     * p201
+     */
+    public String p6(String s){
+        if(s == null){
+            return null;
+        }
+        StringBuilder stringBuilder = new StringBuilder();
+        int count = 1;
+        for(int i=0; i<s.length() - 1;i++){ // O(N) -> n size of the string
+            if(s.charAt(i) == s.charAt(i+1)){
+                count++;
+            } else {
+                stringBuilder.append(s.charAt(i)).append(count);
+                count = 1;
+            }
+        }
+        stringBuilder.append(s.charAt(s.length()-1)).append(count);
+        if(stringBuilder.length() > s.length()){
+            return s;
+        } else{
+          return stringBuilder.toString();
+        }
+    }
 }

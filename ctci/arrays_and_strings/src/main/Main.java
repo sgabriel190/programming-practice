@@ -8,6 +8,7 @@ public class Main {
         System.out.println(solution.p2("abc", "acw"));
         System.out.println(solution.p3("a  bc    "));
         System.out.println(solution.p4("aaaa"));
-        System.out.println(solution.addBit(7, 5));
+        System.out.println(solution.p5("pale", "ple"));
+        System.out.println(solution.p6("aabcccccaaa"));
     }
 }
