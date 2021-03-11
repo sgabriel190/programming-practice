@@ -10,5 +10,8 @@ public class Main {
         System.out.println(solution.p4("aaaa"));
         System.out.println(solution.p5("pale", "ple"));
         System.out.println(solution.p6("aabcccccaaa"));
+        System.out.println(solution.p7(new int[5][5]));
+        solution.p8(new int[5][6]);
+        System.out.println(solution.p9("waterbottle", "waterebottl"));
     }
 }

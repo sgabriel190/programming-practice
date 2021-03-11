@@ -1,6 +1,7 @@
 package main;
 
 import java.util.Arrays;
+import java.util.Random;
 
 public class Solution {
     /**
@@ -176,5 +177,99 @@ public class Solution {
         } else{
           return stringBuilder.toString();
         }
+    }
+
+    private void printMatrix(int[][] matrix){
+        for (int[] ints : matrix) {
+            for (int anInt : ints) {
+                System.out.print(anInt + " ");
+            }
+            System.out.println();
+        }
+        System.out.println();
+    }
+
+    /**
+     * Given an image represented by an NxN matrix, where each pixel in the image is 4 bytes, write a method to rotate
+     * the image by 90 degrees. Can you do this in place?
+     *
+     * p203
+     */
+    public boolean p7(int[][] m){
+        for(int i = 0; i<m.length; ++i){
+            for(int j=0; j<m[i].length; ++j){
+                m[i][j] += i+j;
+            }
+        }
+        if(m.length == 0 || m.length != m[0].length){
+            return false;
+        }
+        int n = m.length;
+        //O(n^2)
+        for(int layer = 0; layer < n/2; layer++){
+            int first = layer;
+            int last = n - 1 - layer;
+            for(int i = first; i<last; ++i){
+                int offset = i - first;
+                int top = m[first][i];
+
+                m[first][i] = m[last-offset][first];
+                m[last-offset][first] = m[last][last - offset];
+                m[last][last-offset] = m[i][last];
+                m[i][last] = top;
+            }
+        }
+        printMatrix(m);
+        return true;
+    }
+    /**
+     * Write an algorithm such that if an element in an MxN matrix is 0, its entire row and column are set to 0.
+     *
+     * p204
+     */
+    public void p8(int[][] matrix){
+        if(matrix == null) return;
+        if(matrix.length == 0 || matrix.length == matrix[0].length) return;
+        int[] columnPositions = new int[matrix[0].length];
+        Arrays.fill(columnPositions, -1);
+        for(int i = 0; i<matrix.length; ++i){
+            for(int j=0; j<matrix[i].length; ++j){
+                if(new Random().nextInt(10) == 1){
+                    matrix[i][j] += 0;
+                    columnPositions[j] = i;
+                } else {
+                    matrix[i][j] += i+j;
+                }
+            }
+        }
+        printMatrix(matrix);
+        // O(M*N)
+        for(int i = 0; i< columnPositions.length; ++i){ // O(M)
+            if(columnPositions[i] != -1){
+                for(int j=0; j<matrix.length; ++j){ // O(N)
+                    matrix[j][i] = 0;
+                }
+                for(int j=0; j<matrix[0].length; ++j){ // O(M)
+                    matrix[columnPositions[i]][j] = 0;
+                }
+            }
+        }
+        printMatrix(matrix);
+    }
+
+    /**
+     * Assume you have a method isSubstring which checks if one word is a substring of another. Given two strings, s1
+     * and s2, write code to check if s2 is a rotation of s1 using only one call to isSubstring (e.g., "waterbottle" is
+     * a rotation of "erbottlewat").
+     */
+    public boolean p9(String s1, String s2){
+        if(s1.length() != s2.length()) return false;
+        for(int i = 0; i < s1.length(); i++){
+            String tmp = s1.substring(0, i);
+            if((s1.substring(i) + tmp).equals(s2)){
+                return true;
+            }
+        }
+        return false;
     }
 }
